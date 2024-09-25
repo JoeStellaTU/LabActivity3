@@ -1,28 +1,29 @@
 package edu.temple.helloworld
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-
-    // Declare view properties - the first one is done for you
-    lateinit var displayTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize with views defined in Layout - the first one is done for you
-        displayTextView = findViewById(R.id.displayTextView)
+        val displayTextView: TextView = findViewById(R.id.displayTextView)
+        val nameEditText: EditText = findViewById(R.id.nameEditText)
+        val clickMeButton: Button = findViewById(R.id.clickMeButton)
 
-        
-        findViewById<Button>(R.id.clickMeButton).setOnClickListener {
-            displayTextView.text = "Hello, ${findViewById<EditText>(R.id.nameEditText).text}"
+        clickMeButton.setOnClickListener {
+            val name = nameEditText.text.toString()
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
+            } else {
+                displayTextView.text = "Hello, $name!"
+            }
         }
-
-
     }
 }
